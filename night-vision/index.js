@@ -4,7 +4,6 @@
 // gridElement
 const gameGrid = document.querySelector('#game-grid')
 const startButton = document.getElementById('start-game')
-const nextLvl = document.getElementById('next-lvl');
 
 // gridColumns, gridRows
 const gridHeight = 10;
@@ -15,34 +14,7 @@ const cells = [];
 // Player first position
 let currentPosition = 12;
 // starting level
-let levelCounter = 0;
-const levels=[];
-
-const map0 =    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
-                10,         14,            19,
-                20,         24,   26,27, 
-                30,         34,   36,37,   39,
-                40,         44,            49,
-                50,         54,   56,57,58,59,
-                60,         64,            69,
-                70,   72,73,74,75,76,77,   79,
-                80,                        89,
-                90,91,92,93,94,95,96,97,98,99]
-
-const level0 = new Level(map2);
-
-const map1 =    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
-                10,            15,         19,
-                      22,23,               29,
-                30,            35,36,      39,
-                40,      43,44,            49,
-                50,51,               57,58,59,
-                60,         64,65,         69,
-                70,                        79,
-                80,   82,      85,         89,
-                90,91,92,93,94,95,96,97,  ,99]
-
-const level1 = new Level(map1);
+let level = 0;
 
 
 startButton.addEventListener('click', startTheGame)
@@ -50,18 +22,6 @@ startButton.addEventListener('click', startTheGame)
 function startTheGame() {
     createTheGrid();
     startButton.remove();
-    displayPlayer();
-    displayKey(29);
-    levels[levelCounter].displayObstacles();
-    hideGrid();
-   // level0.countDamage();
-    nextLevel();
-   
-}
-
-function restartGame(){
-    cells=[];
-    startTheGame();
 }
 
 //create a grid from given height and width
@@ -73,7 +33,11 @@ function createTheGrid() {
         gameGrid.append(div);
         cells.push(div);
     }
-
+    
+    displayPlayer();
+    displayKey(29);
+    level0.displayObstacles();
+    hideGrid();
 }
 
 function displayPlayer(){
@@ -134,7 +98,11 @@ function displayKey(position){
 
 
 function hideGrid(){
-    setTimeout(refreshHiddenClass, 5000);
+    setInterval((e) => {
+        refreshHiddenClass();
+    }, 5000);
+
+    const hidden = document.querySelectorAll('.hidden');
 }
 
 function refreshHiddenClass(){
@@ -153,14 +121,10 @@ function refreshHiddenClass(){
 }
 
 class Level {
-    constructor(obstacles, damage, /*enemies, exitPosition, playerPosition*/){
+    constructor(obstacles, enemies, exitPosition, playerPosition){
         this.obstacles = obstacles;
-        this.damage = damage;
        // this.enemies = enemies;
-       // this.playerPosition = playerPosition
-       
-       this.cells = cells;
-       this.count=0;
+       // this.playerPosition = playerPosition;
     }
 
     displayObstacles(){
@@ -168,34 +132,24 @@ class Level {
             cells[cellIndex].classList.add('obstacle');
         }
     }
-
-    countDamage(){
-        if(cannotMove){
-            this.count+=1;
-            console.log(this.count);
-        }
-    }
 }
 
+const borders = [0, 1,  2,  3, 4,  5, 6,  7, 8, 9,
+                10,                            19,
+                20,
+                30,                            39,
+                40,                            49,
+                50,                            59,
+                60,                            69,
+                70,                            79,
+                80,                            89,
+                90,91,92,93,94,95,96,97,98,99,100]
 
+const level0 = new Level(borders);
 
 
 function cannotMove(index){
     if(cells[index].classList.contains('obstacle')){
         return true;
     }
-}
-
-function checkWin(){
-    if(cells[index].classList.contains('key') && cells[index].classList.contains('player')){
-        nextLvl.classList.remove('mask-on');
-        console.log("WIN!!");
-    }
-    
-}
-
-function nextLevel(){
-    checkWin();
-    levelCounter++;
-    nextLvl.addEventListener('click', restartGame);
 }
