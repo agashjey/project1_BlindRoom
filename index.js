@@ -17,12 +17,14 @@ let currentPosition = 12;
 let level = 0;
 
 
-startButton.addEventListener('click', startTheGame())
+startButton.addEventListener('click', startTheGame)
 
 function startTheGame() {
     createTheGrid();
+    startButton.remove();
 }
 
+//create a grid from given height and width
 function createTheGrid() {
     for(let i=0; i<gridHeight * gridWidth; i++){
         const div = document.createElement('div');
@@ -31,8 +33,11 @@ function createTheGrid() {
         gameGrid.append(div);
         cells.push(div);
     }
+    
     displayPlayer();
     displayKey(29);
+    level0.displayObstacles();
+    hideGrid();
 }
 
 function displayPlayer(){
@@ -71,9 +76,14 @@ function movePlayer (newPosition) {
         return console.error('Invalid Move!');
     }
 
+    if (cannotMove(newPosition)){ 
+        return;
+    }
+
     removePlayer();
     currentPosition = newPosition;
     displayPlayer();
+    refreshHiddenClass();
 
     console.log(cells[currentPosition]);
 }
@@ -83,6 +93,63 @@ function removePlayer(){
 }
 
 function displayKey(position){
-    cells[position].classList.add('key');
+    cells[position].classList.add('key')
 }
 
+
+function hideGrid(){
+    setInterval((e) => {
+        refreshHiddenClass();
+    }, 5000);
+
+    const hidden = document.querySelectorAll('.hidden');
+}
+
+function refreshHiddenClass(){
+    for (let i=0; i<cells.length ; i++){
+        if(cells[i].classList.contains('key')){
+            continue;
+        
+        } else if(cells[i].classList.contains('player')){
+            cells[i].classList.remove('hidden');
+
+        } else if(!cells[i].classList.contains('hidden')){
+            cells[i].classList.add('hidden');
+        }
+            
+    }
+}
+
+class Level {
+    constructor(obstacles, enemies, exitPosition, playerPosition){
+        this.obstacles = obstacles;
+       // this.enemies = enemies;
+       // this.playerPosition = playerPosition;
+    }
+
+    displayObstacles(){
+        for(let cellIndex of this.obstacles){
+            cells[cellIndex].classList.add('obstacle');
+        }
+    }
+}
+
+const borders = [0, 1,  2,  3, 4,  5, 6,  7, 8, 9,
+                10,                            19,
+                20,
+                30,                            39,
+                40,                            49,
+                50,                            59,
+                60,                            69,
+                70,                            79,
+                80,                            89,
+                90,91,92,93,94,95,96,97,98,99,100]
+
+const level0 = new Level(borders);
+
+
+function cannotMove(index){
+    if(cells[index].classList.contains('obstacle')){
+        return true;
+    }
+}
