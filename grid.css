@@ -40,6 +40,16 @@ header h1 {
   position:relative;
 }
 
+#div-lives{
+  position: fixed;
+  left: 55vw;
+  top: 5vh;
+}
+
+.lives{
+  width:30px;
+  height:30px;
+}
 
 
 #div-intro{
@@ -201,15 +211,15 @@ h2 {
   padding:15px 20px;
   border-radius: 35%;
   font-family: 'Press Start 2P';
-  color: darkslategray;
-  border: 8px double darkslategray;
+  color: black;
+  border: 8px double black;
   background: darkgray;
 }
 
 #btn-nextLvl:hover {
   padding:15px 20px;
   margin:-2px -2px;
-  color: darkslategrey;
-  border: 10px double darkslategrey;
+  color: black;
+  border: 10px double black;
   background:lightgrey;
 }

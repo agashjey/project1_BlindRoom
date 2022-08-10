@@ -4,11 +4,13 @@
 // gridElement
 const gameIntro = document.getElementById('div-intro');
 const gameGrid = document.getElementById('div-grid');
+
+const lives = document.querySelectorAll('.lives');
+
 const startBtn = document.getElementById('btn-startgame');
-const nextLvl = document.getElementById('btn-nextLvl');
+const nextLvlBtn = document.getElementById('btn-nextLvl');
 
 const liLevelArray = document.querySelectorAll('li.level');
-
 
 // gridColumns, gridRows
 const gridHeight = 10;
@@ -17,12 +19,14 @@ const gridWidth = 10;
 // cells has all the grid's cells
 let cells = [];
 // Player first position
-let currentPosition = 12;
-let currentExit = 29;
+let playerPosition = 61;
+let exitPosition = 49;
 // starting level
 let levelCounter = 0;
 let levels=[];
 let damageCounter=0;
+
+let isDone= false;
 
 
 //START BUTTON
@@ -32,25 +36,31 @@ startBtn.addEventListener('click', (e) =>{
     startTheGame();
 });
 
-//TRY AGAIN BUTTON
-// tryAgainBtn.addEventListener('click', (e) => {
-//     displayTryAgain.classList.add('no-display');
-//     restartGame();
-// });
-
 //GAME START
 function startTheGame() {
+    nextLvlBtn.classList.add('no-display');
     createTheGrid();
     levelUnlocked();
     startBtn.remove();
+    resetPlayerAndExit();
     displayPlayer();
-    displayKey(currentExit);
+    displayExit();
     levels[levelCounter].displayObstacles();
+    console.log(levels[levelCounter])
     hideGrid();
 }
 
 //CREATE GRID (from given height and width)
 function createTheGrid() {
+    cells=[];
+    gameGrid.innerHTML=`<!-- TRY AGAIN -->
+    <div id="div-tryagain" class="no-display">
+        <h1>YOU LOST !</h1>
+        <p>
+            Press <button id="btn-tryagain" class="">TRY AGAIN</button> to restart !
+        </p>
+    </div>`;
+
     for(let i=0; i<gridHeight * gridWidth; i++){
         const div = document.createElement('div');
         div.classList.add('cell')
@@ -61,6 +71,13 @@ function createTheGrid() {
 }
 
 function levelUnlocked(){
+
+    if(levelCounter==0){
+        for(let i=1; i<liLevelArray.length; i++){
+            liLevelArray[i].innerHTML=`🔒 Level ${i}`;
+            liLevelArray[i].classList.remove('frame');
+        }
+    }
     liLevelArray[levelCounter].innerHTML=`🔦 Level ${levelCounter}`;
     liLevelArray[levelCounter].classList.add('frame');
     if(levelCounter>0){
@@ -70,15 +87,20 @@ function levelUnlocked(){
     }
 }
 
+function resetPlayerAndExit(){
+    playerPosition = levels[levelCounter].playerPosition;
+    exitPosition = levels[levelCounter].exitPosition;
+}
+
 //DECIDE PLAYER INITIAL POSITION 
 function displayPlayer(){
-    const myPosition = cells[currentPosition];
+    const myPosition = cells[playerPosition];
     myPosition.classList.add('player')
 }
 
 //DECIDE EXIT POSITION
-function displayKey(position){
-    cells[position].classList.add('exit')
+function displayExit(){
+    cells[exitPosition].classList.add('exit')
 }
 
 //HIDE MAP
@@ -105,14 +127,12 @@ function refreshHiddenClass(){
 
 //LEVELS
 class Level {
-    constructor(obstacles, playerPosition, exitPosition){
+    constructor(obstacles, playerPos, exitPos){
         this.obstacles = obstacles;
-        this.position = playerPosition;
-        this.exitPosition = exitPosition;
-       // this.enemies = enemies;
-       // this.playerPosition = playerPosition
-       
-       this.cells = cells;
+        this.playerPosition = playerPos;
+        this.exitPosition = exitPos;
+        //this.enemies = enemies;
+        //this.cells = cells;
     }
 
     displayObstacles(){
@@ -121,9 +141,9 @@ class Level {
         }
     }
 
-    resetPlayerPosition(){
-        currentPosition = this.position ;
-    }
+    // resetPlayerPosition(){
+    //     playerPosition = this.playerPosition ;
+    // }
 
 }
 
@@ -134,6 +154,21 @@ function addLevel(level){
 
 //Init map of lvl 0
 const map0 =    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+                10,                        19,
+                20,                        29,
+                30,                        39,
+                40,
+                50,                        59,
+                60,                        69,
+                70,                        79,
+                80,                        89,
+                90,91,92,93,94,95,96,97,98,99]
+
+const lvl0 = new Level(map0, 61, 49); 
+addLevel(lvl0);
+
+//Init map of lvl 1
+const map1 =    [0, 1,    3, 4, 5, 6, 7, 8, 9,
                 10,         14,            19,
                 20,         24,   26,27, 
                 30,         34,   36,37,   39,
@@ -144,13 +179,13 @@ const map0 =    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
                 80,                        89,
                 90,91,92,93,94,95,96,97,98,99]
 
-const lvl0 = new Level(map0, 12, 29);
-addLevel(lvl0);
+const lvl1 = new Level(map1, 2, 29);
+addLevel(lvl1);
 
-//Init map of lvl 1
-const map1 =    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+//Init map of lvl 2
+const map2 =    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
                 10,            15,         19,
-                    22,23,               29,
+                      22,23,               29,
                 30,            35,36,      39,
                 40,      43,44,            49,
                 50,51,               57,58,59,
@@ -159,38 +194,38 @@ const map1 =    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
                 80,   82,      85,         89,
                 90,91,92,93,94,95,96,97,   99]
 
-const lvl1 = new Level(map1, 20, 98); 
-addLevel(lvl1);
+const lvl2 = new Level(map2, 20, 98); 
+addLevel(lvl2);
 
-
+console.log(levels);
 
 
 //MOVE
 document.addEventListener('keydown', (event) => {
-    console.log('I pressed:', event.key);
 
     switch (event.key) {
         case 'ArrowUp':
-            movePlayer(currentPosition - gridHeight)
+            movePlayer(playerPosition - gridHeight)
             break;
 
         case 'ArrowDown':
-            movePlayer(currentPosition + gridHeight)
+            movePlayer(playerPosition + gridHeight)
             break;
         case 'ArrowLeft':
-            if(currentPosition % 10 !== 0) {
-                movePlayer(currentPosition -1);
+            if(playerPosition % 10 !== 0) {
+                movePlayer(playerPosition -1);
             }
             break;
         case 'ArrowRight':
-            if((currentPosition+1) % 10 !== 0) {
-                movePlayer(currentPosition +1);
+            if((playerPosition+1) % 10 !== 0) {
+                movePlayer(playerPosition +1);
             }
             break;
     }
 });
 
 function movePlayer (newPosition) {
+    console.log('Level: ',levelCounter)
     if (newPosition < 0 || newPosition > 99) {
         return console.error('Invalid Move!');
     }
@@ -201,15 +236,20 @@ function movePlayer (newPosition) {
     }
 
     removePlayer();
-    currentPosition = newPosition;
+    playerPosition = newPosition;
     displayPlayer();
     refreshHiddenClass();
     
     if(checkWin(newPosition)){
-        nextLevel();
+        console.log(newPosition,checkWin(newPosition))
+        nextLvlBtn.classList.remove('no-display');
+
     }
-    console.log(cells[currentPosition]);
 }
+nextLvlBtn.addEventListener('click',(e) => {
+    nextLevel();
+    isDone = false;
+});
 
 //IF PLAYER CAN'T GO THERE -> true
 function cannotMove(index){
@@ -220,43 +260,72 @@ function cannotMove(index){
 
 //REMOVE PLAYER from previous position each time we change its position
 function removePlayer(){
-    cells[currentPosition].classList.remove('player');
+    cells[playerPosition].classList.remove('player');
+}
+
+function removeExit(){
+    console.log(`removing 'exit' class from cell ${exitPosition}`);
+    cells[exitPosition].classList.remove('exit');
+    
 }
 
 //COUNT DAMAGE: - increment counter
 //              - if counter > 5 -> gameOver();
 function countDamage(){
-    damageCounter++;
-    console.log(damageCounter);
-    if(damageCounter>4){
-        gameOver();
+    if(!isDone){
+        damageCounter++;
+        if(damageCounter>=0 && damageCounter<5){
+            lives[damageCounter].classList.add('no-display');
+            lives[damageCounter+5].classList.remove('no-display');
+            console.log("lives:",damageCounter)
+        } else {
+            gameOver();
+        }
     }
+}
+
+function setLives(){
+    if(damageCounter>=0 && damageCounter<5){
+        lives[damageCounter].classList.add('no-display');
+        lives[damageCounter+5].classList.remove('no-display');
+    } else if()
 }
 
 
 //GAME OVER: show message, ask restart or no 
 function gameOver(){
-    cells[currentPosition+1].classList.add('obstacle');
-    cells[currentPosition-1].classList.add('obstacle');
-    cells[currentPosition-gridWidth].classList.add('obstacle');
-    cells[currentPosition+gridHeight].classList.add('obstacle');
+    blockPlayer();
     tryAgain();
+}
+
+function blockPlayer(){
+    cells[playerPosition+1].classList.add('obstacle');
+    cells[playerPosition-1].classList.add('obstacle');
+    cells[playerPosition-gridWidth].classList.add('obstacle');
+    cells[playerPosition+gridHeight].classList.add('obstacle');
 }
 
 
 //if WIN -> true and launch nextLevel();
-function checkWin(index){
-    if(cells[index].classList.contains('exit') && cells[index].classList.contains('player')){
-        nextLvl.classList.remove('no-display');
+function checkWin(){
+    console.trace(playerPosition, exitPosition)
+    if(cells[playerPosition].classList.contains('exit') && cells[exitPosition].classList.contains('player')){
+        isDone=true;
+        nextLvlBtn.classList.remove('no-display');
+        blockPlayer();
+
         return true;
     } 
 }
 
 //NEXT LEVEL
 function nextLevel(){
+    removeExit();
     levelCounter++;
-    console.log(levelCounter);
-   // nextLvl.addEventListener('click', (e));
+    console.log("level counter:",levelCounter);
+    removePlayer();
+    resetPlayerAndExit();
+    startTheGame();
 }
 
 function tryAgain(){
@@ -265,25 +334,18 @@ function tryAgain(){
     displayTryAgain.classList.remove('no-display');
     //TRY AGAIN BUTTON
     tryAgainBtn.addEventListener('click', (e) => {
-    displayTryAgain.classList.add('no-display');
-    restartGame();
-});
+        displayTryAgain.classList.add('no-display');
+        restartGame();
+    });
 }
 
 //RESTART GAME
 function restartGame(){
     cells = [];
-    gameGrid.innerHTML=`<!-- TRY AGAIN -->
-    <div id="div-tryagain" class="no-display">
-      <h1>YOU LOST !</h1>
-      <p>
-        Press <button id="btn-tryagain" class="">TRY AGAIN</button> to restart !
-      </p>
-    </div>`;
     damageCounter=0;
     levelCounter=0;
-    currentPosition= 12;
-    currentExit=29;
+    playerPosition;
+    exitPosition;
     startTheGame();
 }
 
