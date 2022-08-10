@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Roboto+Mono:100,200,300,400,500,600,700%27');
-
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P');
 
 * {
     box-sizing: border-box;
@@ -10,9 +10,8 @@
     font-family: 'Roboto Mono';
 }
 
-  
-  
-header {
+
+/*header {
   background-image: url(images/eye.png);
   background-repeat: repeat;
   background-size: contain;
@@ -22,20 +21,56 @@ header {
   width: 100%;
   height: 200px;
 }
-
 header h1 {
   font-size: 5em;
   text-align: center;
-}
+}*/
 
 
-#game-grid {
+#div-grid {
   border: 1px solid black;
   width: 502px;
   height: 502px;
   display: flex;
   flex-wrap: wrap;
   background-color: black;
+  justify-content: center;
+  align-self: center;
+  z-index: 1;
+  position:relative;
+}
+
+
+
+#div-intro{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  font-size:1.2em;
+}
+
+#div-tryagain {
+  position: absolute;
+  z-index: 3;
+  align-self: center;
+}
+
+#div-intro h1,
+#div-tryagain h1 {
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
+  padding-bottom: 150px;
+}
+
+#div-tryagain h1{
+  margin:30px;
+} 
+
+#div-intro p,
+#div-tryagain p {
+  margin:10px;
+  font-family: 'Press Start 2P', cursive;
+  text-align: center;
 }
 
 .cell {
@@ -49,13 +84,14 @@ header h1 {
   background: red;
 }
 
-.key {
+.exit {
   background: greenyellow ;
 }
 
 #middle {
   display: flex;
   justify-content:space-between;
+  height:100vh;
 }
 
 #instructions, #instructions * {
@@ -66,23 +102,33 @@ header h1 {
 
 #instructions, #levels {
   width: 25vw ;
-  padding: 30px 20px 20px 20px;
-  
+  padding: 30px 20px 30px 20px;
+  display: flex;
+  flex-flow: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+#levels{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
 }
 
 #instructions h2 {
   color: whitesmoke;
 }
-#img-container img {
-  width: 100%;
-  height: 100%;
+
+#instructions p {
+  line-height: 1.5;
+  padding-top:10px;
 }
 
-#img-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  padding: 30px 20px 30px 20px;
+#commands img {
+  width: 100%;
+  height: 100%;
+  padding-top:20px;
 }
 
 #levels, #levels * {
@@ -104,15 +150,14 @@ header h1 {
   padding: 10px
 }
 
+li.level.frame {
+  border:4px double red;
+}
+
+
 h2 {
   text-align: center;
   margin: 30px 0px 10px 0px;
-}
-
-#game-grid {
-  display: flex;
-  justify-content: center;
-  align-self: center;
 }
 
 .obstacle {
@@ -128,6 +173,43 @@ h2 {
   border:none;
 }
 
-.mask-on {
+.no-display,
+#div-grid.no-display,
+#div-intro.no-display,
+#div-tryagain.no-display {
   display: none;
+}
+
+#btn-startgame,
+#btn-tryagain{
+  padding:15px 20px;
+  border-radius: 35%;
+  font-family: 'Press Start 2P';
+  color: crimson;
+  border: 8px double crimson;
+}
+
+#btn-startgame:hover,
+#btn-tryagain:hover {
+  padding:15px 20px;
+  margin:-2px -2px;
+  color: #ff0033;
+  border: 10px double #ff0033;
+}
+
+#btn-nextLvl{
+  padding:15px 20px;
+  border-radius: 35%;
+  font-family: 'Press Start 2P';
+  color: darkslategray;
+  border: 8px double darkslategray;
+  background: darkgray;
+}
+
+#btn-nextLvl:hover {
+  padding:15px 20px;
+  margin:-2px -2px;
+  color: darkslategrey;
+  border: 10px double darkslategrey;
+  background:lightgrey;
 }

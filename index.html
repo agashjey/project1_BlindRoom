@@ -17,56 +17,77 @@
     <link rel="stylesheet" href="./grid.css" />
   </head>
   <body>
-    
-    <!-- INSTRUCTIONS -->
-    <header>
-      <h1>Lost In<br>The Dark</h1>
-
-    </header>
+  
     <div id="middle">
+<!-- INSTRUCTIONS -->
       <div id="instructions">
         <h2>Instructions</h2>
         <p>
-          My classmate Walid trapped me into a room of the Iron-school... I don't know where I am.<br>
-          It's all dark, I have my flashlight but my phone battery is weak. I need to keep it plugged to<br>
-          get the full energy of my flashlight... Oh God, please, help me find my way !?
+          Help me find my way in the dark.
+        </p>
+
+        <p>
+          This game will train you to use your memory to find your way out.
         </p>
           
-        <h2>Commands</h2>
         <p>
-          You can use your arrow keys to make me move, but please beware of the obstacles.<br>
-          I know how much Walid is malicious, he wouldn't make the exit easy for me... Damn it Walid !!
+          - You have 5 seconds to keep the map in mind<br>
+          - Use arrow keys to make me move<br>
+          - Beware of the obstacles.<br>
         </p>
-        <div id="img-container">
+
+        <h2>Commands</h2>
+        <div id="commands">
           <img src="images/arrows.png" alt="commands picture"/>
         </div>
       </div>
       
-      <!-- GAME -->
-      <div id="game-grid" class="grid">
-        
+<!-- GAME SCREEN -->
+
+        <!-- INTRO -->
+      <div id="div-intro" class="">
+        <h1>WELCOME IN THE<br>BLIND ROOM !</h1>
+        <p>
+          Press <button id="btn-startgame">START</button> to play !
+        </p>
       </div>
       
+      <!-- GRID -->
+      <div id="div-grid" class="no-display">
+        
+        <!-- TRY AGAIN -->
+        <div id="div-tryagain" class="no-display">
+          <h1>YOU LOST !</h1>
+          <p>
+            Press <button id="btn-tryagain" class="">TRY AGAIN</button> to restart !
+          </p>
+        </div>
+      </div>
+      
+
+<!-- LEVELS SCREEN (RIGHT) -->
       <div id="levels">
+        <div>
         <h2>Levels</h2>
         <ol>
-          <li class="">🔒 Level 0</li>
-          <li class="locked">🔒 Level 1</li>
-          <li class="locked">🔒 Level 2</li>
-          <li class="locked">🔒 Level 3</li>
-          <li class="locked">🔒 Level 4</li>
-          <li class="locked">🔒 Level 5</li>
-          <li class="locked">🔒 Level 6</li>
-          <li class="locked">🔒 Level 7</li>
-          <li class="locked">🔒 Level 8</li>
-          <li class="locked">🔒 Level 9</li>
-          <li class="locked">🔒 Level 10</li>
+          <li class="level">🔒 Level 0</li>
+          <li class="level locked">🔒 Level 1</li>
+          <li class="level locked">🔒 Level 3</li>
+          <li class="level locked">🔒 Level 2</li>
+          <li class="level locked">🔒 Level 4</li>
+          <li class="level locked">🔒 Level 5</li>
+          <li class="level locked">🔒 Level 6</li>
+          <li class="level locked">🔒 Level 7</li>
+          <li class="level locked">🔒 Level 8</li>
+          <li class="level locked">🔒 Level 9</li>
+          <li class="level locked">🔒 Level 10</li>
         </ol>
         
-        <button id="start-game">Start</button>
-        <button id="next-lvl" class="no-display">Next Level</button>
+        
+        <button id="btn-nextLvl" class="no-display">Next level</button>
         
         
+        </div>
         </div>
       </div>
     </div>
