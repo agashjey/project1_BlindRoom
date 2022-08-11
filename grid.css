@@ -13,22 +13,6 @@
 }
 
 
-/*header {
-  background-image: url(images/eye.png);
-  background-repeat: repeat;
-  background-size: contain;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 200px;
-}
-header h1 {
-  font-size: 5em;
-  text-align: center;
-}*/
-
-
 #div-grid {
   border: 1px solid black;
   width: 502px;
@@ -40,6 +24,7 @@ header h1 {
   align-self: center;
   z-index: 1;
   position:relative;
+  border: 1px solid saddlebrown;
 }
 
 #div-lives{
@@ -77,6 +62,8 @@ background-image: url(./images/heart.png);
   position: absolute;
   z-index: 3;
   align-self: center;
+  width: 501px;
+  height: 501px;
 }
 
 #div-intro h1,
@@ -98,7 +85,6 @@ background-image: url(./images/heart.png);
 }
 
 .cell {
-  /*border: 1px solid red;*/
   width: 50px;
   height: 50px;
   background-color: sandybrown;
@@ -133,21 +119,20 @@ background-image: url(./images/heart.png);
   align-items: center;
 }
 
-#levels{
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
-  align-items: center;
-}
 
 #instructions h2 {
-  color: whitesmoke;
+  color: ivory;
+  padding-bottom: 5px;
 }
 
 #instructions p {
-  line-height: 1.5;
-  padding-top:10px;
-  color: whitesmoke;
+  line-height: 1.2;
+  margin-top:25px;
+  color: ivory;
+}
+
+#instructions p br{
+  margin-bottom: 20px;
 }
 #commands {
   display: flex;
@@ -159,23 +144,11 @@ background-image: url(./images/heart.png);
   padding-top:20px;
 }
 
-#player-logo{
-  background: red;
-  width: 60px;
-  height: 30px;
-}
-
-#exit-logo{
-  background: greenyellow;
-  width: 60px;
-  height: 30px;
-}
 
 #right-box, #right-box * {
   background-color: brown;
   color:black;
 }
-
 #right-box {
   display: flex;
   flex-direction: column;
@@ -183,20 +156,21 @@ background-image: url(./images/heart.png);
   justify-items: flex-start;
   align-items: center;
 }
-
-
-
+#levels{
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  align-items: center;
+}
 #levels ol {
   list-style: none;
   display:flex;
   flex-flow: row wrap;
   justify-content: center;
 }
-
 #levels ol li {
   padding: 15px
 }
-
 li.level.frame {
   border:4px double whitesmoke;
 }
@@ -211,15 +185,12 @@ h2 {
   background-color: saddlebrown;
   border: 0.5px solid sienna;
 }
-
 .hidden {
   background-color: black;
 }
-
 .obstacle.hidden{
   border:none;
 }
-
 .no-display,
 #div-grid.no-display,
 #div-intro.no-display,
@@ -273,19 +244,22 @@ h2 {
   background:lightgrey;
 }
 
-/* #btn-playagain{
-  padding:15px 20px;
-  border-radius: 35%;
-  font-family: 'Press Start 2P';
-  color: darkslategray;
-  border: 8px double darkslategrey;
+footer{
+  position:fixed;
+  bottom: 10px;
+  left:650px;
+  font-family: "Press Start 2P";
+  font-size: .65em;
 }
-#btn-playagain:hover {
-  padding:15px 20px;
-  margin:-2px -2px;
-  color: #ff0033;
-  border: 10px double #ff0033;
-} */
+
+#instructions em {
+  color:red;
+  text-shadow: 1px 1px 10px black;
+}
+#instructions i {
+  color:yellowgreen;
+  text-shadow: 1px 1px 10px black;
+}
 
 /* #timer span {
   font-family: "Press Start 2P";

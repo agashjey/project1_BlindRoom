@@ -243,7 +243,7 @@ const map5 =    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
                 70,   72,   74,75,76,77,   79,
                 80,                        89,
                 90,91,92,93,94,95,96,97,98,99]
-const lvl5 = new Level(map5, 90, 41); 
+const lvl5 = new Level(map5, 41, 65); 
 addLevel(lvl5);
 
 
