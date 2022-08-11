@@ -29,19 +29,23 @@ let damageCounter=4;
 
 let isDone= false;
 
-let idTime;
+// let idTimerShow;
+// let timer;
+let idTimerHide;
 
 
 //START BUTTON
 startBtn.addEventListener('click', (e) =>{
     gameIntro.classList.add('no-display');
     gameGrid.classList.remove('no-display');
+    //document.querySelector('audio').play();
     startTheGame();
 });
 
 //GAME START
 function startTheGame() {
-    clearInterval(idTime);
+    clearInterval(idTimerHide);
+    //setTimer();
     nextLvlBtn.classList.add('no-display');
     createTheGrid();
     levelUnlocked();
@@ -51,7 +55,6 @@ function startTheGame() {
     displayPlayer();
     displayExit();
     levels[levelCounter].displayObstacles();
-    console.log(levels[levelCounter])
     hideGrid();
 }
 
@@ -62,7 +65,7 @@ function createTheGrid() {
     <div id="div-tryagain" class="no-display">
         <h1>YOU LOST !</h1>
         <p>
-            Press <button id="btn-tryagain" class="">TRY AGAIN</button> to restart !
+            Press <button id="btn-tryagain" class="">TRY AGAIN</button> to restart
         </p>
     </div>`;
 
@@ -75,8 +78,8 @@ function createTheGrid() {
     }
 }
 
+//Change the icons on levels box
 function levelUnlocked(){
-
     if(levelCounter==0){
         for(let i=1; i<liLevelArray.length; i++){
             liLevelArray[i].innerHTML=`🔒 Level ${i}`;
@@ -88,7 +91,6 @@ function levelUnlocked(){
     if(levelCounter>0){
         liLevelArray[levelCounter-1].innerHTML=`✅ Level ${levelCounter-1}`;
         liLevelArray[levelCounter-1].classList.remove('frame');
-
     }
 }
 
@@ -110,7 +112,7 @@ function displayExit(){
 
 //HIDE MAP
 function hideGrid(){
-    idTime = setTimeout(refreshHiddenClass, 5000);
+    idTimerHide = setTimeout(refreshHiddenClass, 5000);
 }
 
 function refreshHiddenClass(){
@@ -211,11 +213,38 @@ const map3 =    [0,    2, 3, 4, 5, 6, 7, 8, 9,
                 60,61,62,63,64,65,   67,68,69,
                 70,71,                  78,79,
                 80,      83,      86,      89,
-                90,91,  93,94,95,96,97,98,99]
+                90,91,   93,94,95,96,97,98,99]
 
 const lvl3 = new Level(map3, 1, 92); 
 addLevel(lvl3);
 
+//Init map of lvl 4
+const map4 =    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+                10,      13,               19,
+                20,21,          25,        29,
+                30,31,   33,34,35,36,37,   39,
+                40,         44,            49,
+                50,51,52,53,54,      57,58,59,
+                60,         64,            69,
+                70,   72,   74,75,76,      79,
+                80,   82,                  89,
+                      92,93,94,95,96,97,98,99]
+const lvl4 = new Level(map4, 90, 41); 
+addLevel(lvl4);
+
+//Init map of lvl 5
+const map5 =    [0, 1, 2, 3, 4, 5, 6, 7, 8, 9,
+                10,                        19,
+                20,   22,23,24,25,26,27,   29,
+                30,   32,            37,   39,
+                40,   42,   44,45,   47,   49,
+                50,51,52,   54,      57,   59,
+                60,61,62,   64,      67,   69,
+                70,   72,   74,75,76,77,   79,
+                80,                        89,
+                90,91,92,93,94,95,96,97,98,99]
+const lvl5 = new Level(map5, 90, 41); 
+addLevel(lvl5);
 
 
 //MOVE
@@ -314,8 +343,12 @@ function gameOver(){
 function blockPlayer(){
     cells[playerPosition+1].classList.add('obstacle');
     cells[playerPosition-1].classList.add('obstacle');
-    cells[playerPosition-gridWidth].classList.add('obstacle');
-    cells[playerPosition+gridHeight].classList.add('obstacle');
+    if(playerPosition>9){
+        cells[playerPosition-gridWidth].classList.add('obstacle');
+    }
+    if(playerPosition<90){
+        cells[playerPosition+gridHeight].classList.add('obstacle');
+    }
 }
 
 
@@ -323,12 +356,13 @@ function blockPlayer(){
 function checkWin(){
     if(cells[playerPosition].classList.contains('exit') && cells[exitPosition].classList.contains('player')){
         isDone=true;
-        if(levelCounter-1===levels.length){
-
-        }
+        console.log("level:",levelCounter," | levels length:", levels.length);
         nextLvlBtn.classList.remove('no-display');
         blockPlayer();
-
+        
+        if(levelCounter+1===levels.length){
+            tryAgain();
+        }
         return true;
     } 
 }
@@ -346,10 +380,21 @@ function nextLevel(){
 function tryAgain(){
     const tryAgainBtn = document.getElementById('btn-tryagain');
     const displayTryAgain = document.getElementById('div-tryagain');
+    if(isDone){
+        displayTryAgain.querySelector('h1').textContent =`YOU WIN !`;
+        tryAgainBtn.textContent ='PLAY AGAIN';
+        tryAgainBtn.className='winner';
+    } //else {
+    //     displayTryAgain.querySelector('h1').textContent =`YOU LOST !`;
+    //     tryAgainBtn.textContent ='TRY AGAIN';
+    //     tryAgainBtn.className='loser';
+    // }
     displayTryAgain.classList.remove('no-display');
+
     //TRY AGAIN BUTTON
     tryAgainBtn.addEventListener('click', (e) => {
         displayTryAgain.classList.add('no-display');
+        isDone=false;
         restartGame();
     });
 }
@@ -362,6 +407,24 @@ function restartGame(){
     levelCounter=0;
     playerPosition;
     exitPosition;
+    isDone=false;
     startTheGame();
 }
+
+// function setTimer(){
+//     timer=4;
+//     document.getElementById('timer span').classList.remove('no-display');
+//     idTimerShow= setInterval(() => {
+
+//         document.getElementById('secUni').textContent = `${timer}`;
+//         if(timer<=0){
+//             clearInterval(idTimerShow);
+//             document.getElementById('secUni').textContent = `${timer}`
+//         }
+//         timer--;
+//     }, 1000);
+
+//     timer=4;
+// }
+
 

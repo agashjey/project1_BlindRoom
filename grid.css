@@ -77,7 +77,6 @@ background-image: url(./images/heart.png);
   position: absolute;
   z-index: 3;
   align-self: center;
-
 }
 
 #div-intro h1,
@@ -85,11 +84,10 @@ background-image: url(./images/heart.png);
   font-family: 'Press Start 2P', cursive;
   text-align: center;
   padding-bottom: 150px;
-}
+  text-shadow: 2px 4px 1px black;}
 
 #div-tryagain h1{
   margin:30px;
-
 } 
 
 #div-intro p,
@@ -151,11 +149,26 @@ background-image: url(./images/heart.png);
   padding-top:10px;
   color: whitesmoke;
 }
-
+#commands {
+  display: flex;
+  justify-content: center;
+}
 #commands img {
   width: 100%;
   height: 100%;
   padding-top:20px;
+}
+
+#player-logo{
+  background: red;
+  width: 60px;
+  height: 30px;
+}
+
+#exit-logo{
+  background: greenyellow;
+  width: 60px;
+  height: 30px;
 }
 
 #right-box, #right-box * {
@@ -222,13 +235,26 @@ h2 {
   color: crimson;
   border: 8px double crimson;
 }
-
 #btn-startgame:hover,
 #btn-tryagain:hover {
   padding:15px 20px;
   margin:-2px -2px;
   color: #ff0033;
   border: 10px double #ff0033;
+}
+
+#btn-tryagain.winner{
+  padding:15px 20px;
+  border-radius: 35%;
+  font-family: 'Press Start 2P';
+  color: lightseagreen;
+  border: 8px double lightseagreen;
+}
+#btn-tryagain.winner:hover {
+  padding:15px 20px;
+  margin:-2px -2px;
+  color: lightblue;
+  border: 10px double lightblue;
 }
 
 #btn-nextLvl{
@@ -239,7 +265,6 @@ h2 {
   border: 8px double black;
   background: darkgray;
 }
-
 #btn-nextLvl:hover {
   padding:15px 20px;
   margin:-2px -2px;
@@ -248,7 +273,20 @@ h2 {
   background:lightgrey;
 }
 
+/* #btn-playagain{
+  padding:15px 20px;
+  border-radius: 35%;
+  font-family: 'Press Start 2P';
+  color: darkslategray;
+  border: 8px double darkslategrey;
+}
+#btn-playagain:hover {
+  padding:15px 20px;
+  margin:-2px -2px;
+  color: #ff0033;
+  border: 10px double #ff0033;
+} */
 
-#timer span {
+/* #timer span {
   font-family: "Press Start 2P";
-  text-shadow: 0px 0px 50px white, 0 0 1em white, 0 0 0.2em white;}
+  text-shadow: 0px 0px 50px white, 0 0 1em white, 0 0 0.2em white;} */
