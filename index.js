@@ -288,7 +288,7 @@ function setLives(){
     if(damageCounter>=0 && damageCounter<5){
         lives[damageCounter].classList.add('no-display');
         lives[damageCounter+5].classList.remove('no-display');
-    } else if()
+    }
 }
 
 
