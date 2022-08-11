@@ -53,21 +53,21 @@
       </div>
 
       <div id="div-lives">
-        <img class="lives life1" src="images/heart.png" alt="life 1"/>
-        <img class="lives life2" src="images/heart.png" alt="life 2"/>
-        <img class="lives life3" src="images/heart.png" alt="life 3"/>
-        <img class="lives life4" src="images/heart.png" alt="life 4"/>
-        <img class="lives life5" src="images/heart.png" alt="life 5"/>
-        <img class="lives life6 no-display" src="images/no-heart.png" alt="life vide 1"/>
-        <img class="lives life7 no-display" src="images/no-heart.png" alt="life vide 2"/>
-        <img class="lives life8 no-display" src="images/no-heart.png" alt="life vide 3"/>
-        <img class="lives life9 no-display" src="images/no-heart.png" alt="life vide 4"/>
-        <img class="lives life10 no-display" src="images/no-heart.png" alt="life vide 5"/>
+        <div class="lives " alt="life 1"></div>
+        <div class="lives " alt="life 2"></div>
+        <div class="lives " alt="life 3"></div>
+        <div class="lives " alt="life 4"></div>
+        <div class="lives " alt="life 5"></div>
+        <!-- <img class="lives no-life no-display" src="images/no-heart.png" alt="life vide 1"/>
+        <img class="lives no-life no-display" src="images/no-heart.png" alt="life vide 2"/>
+        <img class="lives no-life no-display" src="images/no-heart.png" alt="life vide 3"/>
+        <img class="lives no-life no-display" src="images/no-heart.png" alt="life vide 4"/>
+        <img class="lives no-life no-display" src="images/no-heart.png" alt="life vide 5"/> -->
       </div>
       
       <!-- GRID -->
       <div id="div-grid" class="no-display">
-        
+  
         <!-- TRY AGAIN -->
         <div id="div-tryagain" class="no-display">
           <h1>YOU LOST !</h1>
@@ -75,36 +75,39 @@
             Press <button id="btn-tryagain" class="">TRY AGAIN</button> to restart !
           </p>
         </div>
-      </div>
 
-     
-      
+        <div id="div-win" class="no-display">
+          <h1>YOU WIN !</h1>
+          <p>
+            Press <button id="btn-tryagain" class="">PLAY AGAIN</button> to restart !
+          </p>
+        </div>
+      </div>
 
 <!-- LEVELS SCREEN (RIGHT) -->
-      <div id="levels">
-        <div>
-        <h2>Levels</h2>
-        <ol>
-          <li class="level">🔒 Level 0</li>
-          <li class="level locked">🔒 Level 1</li>
-          <li class="level locked">🔒 Level 3</li>
-          <li class="level locked">🔒 Level 2</li>
-          <li class="level locked">🔒 Level 4</li>
-          <li class="level locked">🔒 Level 5</li>
-          <li class="level locked">🔒 Level 6</li>
-          <li class="level locked">🔒 Level 7</li>
-          <li class="level locked">🔒 Level 8</li>
-          <li class="level locked">🔒 Level 9</li>
-          <li class="level locked">🔒 Level 10</li>
-        </ol>
-        
-        
+      <div id="right-box">
+        <div id="timer">
+          <span>00:0</span><span id="secUni" class="number">0</span>
+        </div>
+        <div id="levels">
+          <h2>Levels</h2>
+          <ol>
+            <li class="level">🔒 Level 0</li>
+            <li class="level locked">🔒 Level 1</li>
+            <li class="level locked">🔒 Level 3</li>
+            <li class="level locked">🔒 Level 2</li>
+            <li class="level locked">🔒 Level 4</li>
+            <li class="level locked">🔒 Level 5</li>
+            <li class="level locked">🔒 Level 6</li>
+            <li class="level locked">🔒 Level 7</li>
+            <li class="level locked">🔒 Level 8</li>
+            <li class="level locked">🔒 Level 9</li>
+            <li class="level locked">🔒 Level 10</li>
+          </ol>
+        </div>  
         <button id="btn-nextLvl" class="no-display">Next level</button>
-        
-        
-        </div>
-        </div>
       </div>
+
     </div>
   </body>
 </html>
