@@ -61,6 +61,7 @@ background-image: url(./images/heart.png);
 #div-tryagain {
   position: absolute;
   z-index: 3;
+  padding-top:80px;
   align-self: center;
   width: 501px;
   height: 501px;
